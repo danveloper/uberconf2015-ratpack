@@ -8,9 +8,15 @@ buildscript {
   }
 }
 
-apply plugin: 'io.ratpack.ratpack-groovy'
+apply plugin: 'io.ratpack.ratpack-java'
+
+mainClassName = "app.Main"
 
 repositories {
   maven { url "https://oss.jfrog.org/oss-snapshot-local" }
   jcenter()
+}
+
+dependencies {
+  compile ratpack.dependency("guice")
 }
