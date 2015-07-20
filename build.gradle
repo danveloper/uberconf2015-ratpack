@@ -1,0 +1,16 @@
+buildscript {
+  repositories {
+    maven { url "https://oss.jfrog.org/oss-snapshot-local" }
+    jcenter()
+  }
+  dependencies {
+    classpath 'io.ratpack:ratpack-gradle:0.9.19-SNAPSHOT'
+  }
+}
+
+apply plugin: 'io.ratpack.ratpack-groovy'
+
+repositories {
+  maven { url "https://oss.jfrog.org/oss-snapshot-local" }
+  jcenter()
+}
