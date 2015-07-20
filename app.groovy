@@ -5,21 +5,22 @@ import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
   handlers {
-    path("api") {
-      byMethod {
-        get {
-          render "Hello API!"
-        }
-      }
-    }
     all {
-      byMethod {
-        get {
-          render "Hello World"
+      byContent {
+        json {
+         render '{ "message": "Gave you JSON" }'
         }
-        post {
-          def body = request.body.text
-          render "Got your text: $body"
+        xml {
+          render '<message>Gave you XML</message>'
+        }
+        html {
+          render '<html><body>Gave you HTML</body></html>'
+        }
+        plainText {
+          render 'Gave you plain text'
+        }
+        noMatch {
+          render 'Unsupported content type'
         }
       }
     }
