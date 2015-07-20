@@ -1,33 +1,24 @@
 import app.Messages
+import java.nio.file.Paths;
 
-import static ratpack.registry.Registry.single
 import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
   bindings {
-    bindInstance(new Messages("Hello World!"))
+    def path = Paths.get("filesystem/messages.properties").toAbsolutePath()
+    println path
+    bindInstance(new Messages(path))
   }
   handlers {
-    all {
-      def defaultMessage
-      switch(request.headers.'User-Agent') { 
-        case 'uberconf':
-          defaultMessage = "Hello UberConf!"
-          break
-        case 'springone':
-          defaultMessage = "Hello SpringOne2gx!"
-          break
-      }
-      if (defaultMessage) {
-        def messages = new Messages(defaultMessage)
-        next(single(messages))
-      } else {
-        next()
-      }
-    }
-
     get { Messages messages ->
-      render(messages.getDefaultMessage())
+      def ua = request.headers.'User-Agent'
+      if (ua == 'uberconf') {
+        render messages.getUberConfMessage()
+      } else if (ua == 'springone') {
+        render messages.getSpringOneMessage()
+      } else {
+        render messages.getDefaultMessage()
+      }
     }
   }
 }
