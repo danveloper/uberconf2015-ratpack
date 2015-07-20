@@ -5,16 +5,23 @@ import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
   handlers {
-
-    when { request.headers.'User-Agent' == "demo" }
-         {
-           get {
-             render "Hello Demo!"
-           } 
-         }
-
+    path("api") {
+      byMethod {
+        get {
+          render "Hello API!"
+        }
+      }
+    }
     all {
-      render "Hello World!"
+      byMethod {
+        get {
+          render "Hello World"
+        }
+        post {
+          def body = request.body.text
+          render "Got your text: $body"
+        }
+      }
     }
   }
 }
