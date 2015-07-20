@@ -10,6 +10,8 @@ buildscript {
 
 apply plugin: 'io.ratpack.ratpack-groovy'
 
+mainClassName = "app.Main"
+
 repositories {
   maven { url "https://oss.jfrog.org/oss-snapshot-local" }
   jcenter()
