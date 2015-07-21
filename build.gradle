@@ -14,3 +14,7 @@ repositories {
   maven { url "https://oss.jfrog.org/oss-snapshot-local" }
   jcenter()
 }
+
+dependencies {
+  compile ratpack.dependency("rx")
+}
